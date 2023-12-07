@@ -6,23 +6,25 @@ public class TeeTime {
     String[] players = { "", "", "", "" };
     Date date;
     int resId;
-
+    int numPlayers = 0;
     int carts;
 
-    TeeTime(String ps, String dt, String cts, int rid) {
-        String[] pls = ps.split(", ", 4);
-        for (int i = 0; i < pls.length; i++) {
-            players[i] = pls[i];
+    TeeTime(String[] ps, String gt, String cts) {
+        for (int i = 0; i < ps.length; i++) {
+            players[i] = ps[i];
+            numPlayers++;
         }
-        resId = rid;
         carts = Integer.parseInt(cts);
-        try {
-            SimpleDateFormat dateForm = new SimpleDateFormat("yyyy-MM-dd/HH-mm");
-            date = dateForm.parse(dt);
-        } catch (java.text.ParseException exc) {
-            System.out.println(exc);
-        }
+        String gameTime = gt;
+    }
 
+    public String listPlayers() {
+        String retplayers = "";
+        for (int i = 0; i < this.numPlayers; i++) {
+            retplayers = retplayers.concat(this.players[i]);
+            retplayers = retplayers.concat(", ");
+        }
+        return retplayers;
     }
 
 }
